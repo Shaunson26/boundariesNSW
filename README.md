@@ -27,7 +27,7 @@ These generally have boundary codes and names to join with other data.
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("Shaunson26/MoHReportR")
+devtools::install_github("Shaunson26/boundariesNSW")
 ```
 
 ``` r
