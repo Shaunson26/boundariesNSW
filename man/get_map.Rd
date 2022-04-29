@@ -29,6 +29,6 @@ folder for import of the geojson into R using \code{sf::sf_read()}
 lga2019 <- get_map('lga2019')
 
 # Extract LGA19 geojson to working directory
-lga2019 <- get_map('lga2019', destfile = '.', return_sf_object = F)
+lga2019 <- get_map('lga2019', return_sf_object = FALSE)
 }
 }

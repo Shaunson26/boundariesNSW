@@ -15,7 +15,7 @@
 #' lga2019 <- get_map('lga2019')
 #'
 #' # Extract LGA19 geojson to working directory
-#' lga2019 <- get_map('lga2019', destfile = '.', return_sf_object = F)
+#' lga2019 <- get_map('lga2019', return_sf_object = FALSE)
 #' }
 get_map <- function(boundary = c('lga2016', 'lga2019', 'lhd2010', 'poa2016', 'gccsa2016'),
                     geojson_extract_location,
@@ -38,7 +38,7 @@ get_map <- function(boundary = c('lga2016', 'lga2019', 'lhd2010', 'poa2016', 'gc
     geojson_extract_location <- tempdir()
   }
 
-  untar(file_path, exdir = geojson_extract_location)
+  utils::untar(file_path, exdir = geojson_extract_location)
 
   message(paste0(file, ' extracted to ', geojson_extract_location))
 

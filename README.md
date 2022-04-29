@@ -7,9 +7,11 @@
 <!-- badges: end -->
 
 The goal of boundariesNSW is to simplify the acquisition and use of NSW
-boundary shapefiles. The package has simply obtained various shapefiles,
-coverted to geojson, and created helper functions to import them into
-your R environment, or export them to a chosen directory.
+boundary shapefiles for **simple plotting tasks**. The package has
+simply obtained various shapefiles, simplified spatial objects (remove
+unnecessary fields), converted to geojson, and created helper functions
+to import them into your R environment, or export them to a chosen
+directory.
 
 source <https://dbr.abs.gov.au/absmaps/index.html>
 
@@ -26,8 +28,7 @@ These generally have boundary codes and names to join with other data.
 ## Installation
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("Shaunson26/MoHReportR")
+devtools::install_github("Shaunson26/boundariesNSW")
 ```
 
 ``` r
@@ -41,12 +42,12 @@ library(boundariesNSW)
 The geojson are stored in the `extdata/` folder of the package
 installation directory. We can list them with the function
 `list_maps()`. This function is just a wrapper for `list.files()` and we
-can use the `full.names` to list the full file path if required (not
-shown). However, the next function `get_map` will handle extraction and
+can use the `full.names = TRUE` to list the full file path if required.
+However, the next function `get_map()` will handle extraction and
 importing.
 
 ``` r
-list_maps()
+list_maps(full.names = FALSE)
 #> [1] "gccsa2016-geojson.gzip" "lga2016-geojson.gzip"   "lga2019-geojson.gzip"  
 #> [4] "lhd2010-geojson.gzip"   "poa2016-geojson.gzip"
 ```
@@ -60,9 +61,9 @@ object.
 # Import LGA2019 into R
 # * return_sf_object = TRUE is default
 lga2019 <- get_map(boundary = 'lga2019', return_sf_object = TRUE)
-#> lga2019-geojson.gzip extracted to C:\Users\60141508\AppData\Local\Temp\RtmpyiuVEY
+#> lga2019-geojson.gzip extracted to C:\Users\60141508\AppData\Local\Temp\RtmpmI8E9j
 #> Reading layer `lga2019' from data source 
-#>   `C:\Users\60141508\AppData\Local\Temp\RtmpyiuVEY\lga2019_boundaries.geojson' 
+#>   `C:\Users\60141508\AppData\Local\Temp\RtmpmI8E9j\lga2019_boundaries.geojson' 
 #>   using driver `GeoJSON'
 #> Simple feature collection with 129 features and 2 fields
 #> Geometry type: MULTIPOLYGON
@@ -72,7 +73,8 @@ lga2019 <- get_map(boundary = 'lga2019', return_sf_object = TRUE)
 ```
 
 `get_map()` has the option of just exporting the map to a chosen
-directory
+directory. In this example, the geojson is extracted to the given
+location and not imported to R.
 
 ``` r
 get_map(boundary = 'lga2019', geojson_extract_location = 'C:/Users/60141508', return_sf_object = FALSE)
@@ -82,7 +84,11 @@ get_map(boundary = 'lga2019', geojson_extract_location = 'C:/Users/60141508', re
 ### simplify_map
 
 The default maps are often of too high resolution for regular tasks and
-take time to plot. We can simply the maps using `simplify_map`
+take time to plot. We can simplify the maps using `simplify_map()`. This
+is just a wrapper to the
+`rmapshaper::ms_simplify(keep_proportion = 0.1, keep_shapes = TRUE)`.
+You will find that plotting is faster, and that boundaries are less
+fuzzy when you do this.
 
 ``` r
 library(ggplot2)
@@ -97,6 +103,7 @@ ggplot(lga2019) +
 ``` r
 lga2019_min <- simplify_map(lga2019, keep_proportion = 0.25)
 
+# Notice clearer boundaries
 ggplot(lga2019_min) +
   geom_sf() +
   theme_void()
