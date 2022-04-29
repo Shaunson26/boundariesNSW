@@ -26,7 +26,10 @@ spatial objects (remove unnecessary fields), converted to geojson, and
 created helper functions to import them into your R environment, or export them to a chosen 
 directory.
 
-source https://dbr.abs.gov.au/absmaps/index.html
+source https://dbr.abs.gov.au/absmaps/index.html  
+
+There are now 2021 shapefiles available from ABS! They are not included here as this package
+was created for other work purposes.
 
 Current shape files:
 

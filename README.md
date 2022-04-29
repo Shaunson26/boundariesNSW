@@ -15,6 +15,9 @@ directory.
 
 source <https://dbr.abs.gov.au/absmaps/index.html>
 
+There are now 2021 shapefiles available from ABS! They are not included
+here as this package was created for other work purposes.
+
 Current shape files:
 
 -   Local Government Area 2016; lga2016-geojson.gzip  
@@ -61,9 +64,9 @@ object.
 # Import LGA2019 into R
 # * return_sf_object = TRUE is default
 lga2019 <- get_map(boundary = 'lga2019', return_sf_object = TRUE)
-#> lga2019-geojson.gzip extracted to C:\Users\60141508\AppData\Local\Temp\RtmpmI8E9j
+#> lga2019-geojson.gzip extracted to C:\Users\60141508\AppData\Local\Temp\RtmpqQqJF2
 #> Reading layer `lga2019' from data source 
-#>   `C:\Users\60141508\AppData\Local\Temp\RtmpmI8E9j\lga2019_boundaries.geojson' 
+#>   `C:\Users\60141508\AppData\Local\Temp\RtmpqQqJF2\lga2019_boundaries.geojson' 
 #>   using driver `GeoJSON'
 #> Simple feature collection with 129 features and 2 fields
 #> Geometry type: MULTIPOLYGON
