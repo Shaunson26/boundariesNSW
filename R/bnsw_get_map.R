@@ -1,27 +1,27 @@
 #' Import NSW map into R session
 #'
-#' This function returns a chosen map an sf object. The maps are stored as compressed
-#' geojsons with this package. You can chose whether to extract that geojson to a
+#' This function returns a chosen map an `sf` object. The maps are stored as compressed
+#' geojsons within this package. You can chose whether to extract that geojson to a
 #' chosen destination (geojson_extract_location), or allow the function to extract to a temporary
-#' folder for import of the geojson into R using \code{sf::sf_read()}
+#' folder for import of the geojson into R using [sf::st_read()]
 #'
 #' @param boundary character, code for selected boundary
 #' @param geojson_extract_location character, a path for extracted geojson. If missing a \code{tempdir()} will be used
-#' @param return_sf_object boolean, whether to return the map as an \code{sf} object
+#' @param return_sf_object boolean, whether to return the map as an `sf` object
 #'
 #' @export
 #' @examples {
 #' # Import LGA19 as sf object to R session
-#' lga2019 <- get_map('lga2019')
+#' lga2019 <- bnsw_get_map('lga2019')
 #'
 #' # Extract LGA19 geojson to working directory
-#' lga2019 <- get_map('lga2019', return_sf_object = FALSE)
+#' lga2019 <- bnsw_get_map('lga2019', return_sf_object = FALSE)
 #' }
-get_map <- function(boundary = c('lga2016', 'lga2019', 'lhd2010', 'poa2016', 'gccsa2016'),
+bnsw_get_map <- function(boundary = c('lga2016', 'lga2019', 'lhd2010', 'poa2016', 'gccsa2016'),
                     geojson_extract_location,
                     return_sf_object = TRUE){
 
-  boundary <- boundary[1]
+  boundary <- match.arg(boundary, choices = c('lga2016', 'lga2019', 'lhd2010', 'poa2016', 'gccsa2016'))
 
   # Make a file table - zip, filename, alias,
   file <-

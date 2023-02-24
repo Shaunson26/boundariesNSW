@@ -4,3 +4,6 @@
 ^README\.Rmd$
 ^dev_area
 ^LICENSE\.md$
+^dev$
+^\.github$
+^man/figures/hexsticker\.R$

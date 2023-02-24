@@ -15,9 +15,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-# boundariesNSW
+# boundariesNSW <img src='man/figures/logo.png' align="right" height="139" />
 
 <!-- badges: start -->
+[![GitHub R package version](https://github.com/Shaunson26/boundariesNSW)](https://img.shields.io/github/r-package/v/shaunson26/boundariesNSW)
+[![check-standard](https://github.com/Shaunson26/boundariesNSW/actions/workflows/check-standard.yaml/badge.svg)](https://github.com/Shaunson26/boundariesNSW/actions/workflows/check-standard.yaml)
 <!-- badges: end -->
 
 The goal of boundariesNSW is to simplify the acquisition and use of NSW boundary shapefiles
@@ -26,18 +28,18 @@ spatial objects (remove unnecessary fields), converted to geojson, and
 created helper functions to import them into your R environment, or export them to a chosen 
 directory.
 
-source https://dbr.abs.gov.au/absmaps/index.html  
+> Source https://dbr.abs.gov.au/absmaps/index.html  
 
 There are now 2021 shapefiles available from ABS! They are not included here as this package
 was created for other work purposes.
 
 Current shape files:
 
- - Local Government Area 2016; lga2016-geojson.gzip  
- - Local Government Area 2019; lga2019-geojson.gzip  
- - Local Health District 2010; lhd2010-geojson.gzip  
- - Postal Areas 2016; poa2016-geojson.gzip 
- - Greater Capital City Statistical Area 2016; gccsa2016-geojson.gzip  
+ - Local Government Area 2016 - `lga2016-geojson.gzip`  
+ - Local Government Area 2019 - `lga2019-geojson.gzip`  
+ - Local Health District 2010 - `lhd2010-geojson.gzip`  
+ - Postal Areas 2016 - `poa2016-geojson.gzip` 
+ - Greater Capital City Statistical Area 2016; `gccsa2016-geojson.gzip`  
  
 These generally have boundary codes and names to join with other data.
 
@@ -47,44 +49,48 @@ These generally have boundary codes and names to join with other data.
 devtools::install_github("Shaunson26/boundariesNSW")
 ```
 
-```{r}
+```{r, eval = F}
 library(boundariesNSW)
+```
+
+```{r, include = F}
+devtools::load_all(".")
 ```
 
 ## Usage
 
-### list_maps()
+### bnsw_list_maps()
 
-The geojson are stored in the `extdata/` folder of the package installation directory.
-We can list them with the function `list_maps()`. This function is just a wrapper for
+The geojsons are stored in the `extdata/` folder of the package installation directory.
+We can list them with the function `bnsw_list_maps()`. This function is just a wrapper for
 `list.files()` and we can use the `full.names = TRUE` to list the full file path if required.
-However, the next function `get_map()` will handle extraction and importing.
+However, the next function `bnsw_get_map()` will handle extraction and importing.
 
 ```{r}
-list_maps(full.names = FALSE)
+bnsw_list_maps(full.names = FALSE)
 ```
 
-### get_map()
+### bnsw_get_map()
 
-`get_map()` imports a chosen boundary into your R environment as an `sf` object.
+`bnsw_get_map()` imports a chosen boundary into your R environment as an `sf` object.
 
 ```{r}
 # Import LGA2019 into R
 # * return_sf_object = TRUE is default
-lga2019 <- get_map(boundary = 'lga2019', return_sf_object = TRUE)
+lga2019 <- bnsw_get_map(boundary = 'lga2019', return_sf_object = TRUE)
 ```
 
-`get_map()` has the option of just exporting the map to a chosen directory. In this
+`bnsw_get_map()` has the option of just exporting the map to a chosen directory. In this
 example, the geojson is extracted to the given location and not imported to R.
 
 ```{r}
-get_map(boundary = 'lga2019', geojson_extract_location = 'C:/Users/60141508', return_sf_object = FALSE)
+bnsw_get_map(boundary = 'lga2019', geojson_extract_location = 'C:/temp', return_sf_object = FALSE)
 ```
 
 ### simplify_map
 
 The default maps are often of too high resolution for regular tasks and take time to plot. We
-can simplify the maps using `simplify_map()`. This is just a wrapper to the 
+can simplify the maps using `bnsw_simplify_map()`. This is just a wrapper to the 
 `rmapshaper::ms_simplify(keep_proportion = 0.1, keep_shapes = TRUE)`. You will find that plotting
 is faster, and that boundaries are less fuzzy when you do this.
 
@@ -95,7 +101,7 @@ ggplot(lga2019) +
   geom_sf() +
   theme_void()
 
-lga2019_min <- simplify_map(lga2019, keep_proportion = 0.25)
+lga2019_min <- bnsw_simplify_map(lga2019, keep_proportion = 0.25)
 
 # Notice clearer boundaries
 ggplot(lga2019_min) +
@@ -103,8 +109,14 @@ ggplot(lga2019_min) +
   theme_void()
 ```
 
-## TODO
+## Boundary metadata
 
-  - Add other boundaries  
-  - Add tests
+Sometimes we may just want the IDs of the polygons in a shapefile. You will find
+these as datasets `bnsw_{boundary}_code_names`
+
+```{r}
+head(bnsw_lga2019_code_names)
+head(bnsw_lga2016_code_names)
+```
+
 
