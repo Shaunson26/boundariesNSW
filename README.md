@@ -5,8 +5,8 @@
 
 <!-- badges: start -->
 
-[![GitHub R package
-version](https://github.com/Shaunson26/boundariesNSW)](https://img.shields.io/github/r-package/v/shaunson26/boundariesNSW)
+![GitHub R package
+version](https://img.shields.io/github/r-package/v/shaunson26/boundariesNSW)
 [![check-standard](https://github.com/Shaunson26/boundariesNSW/actions/workflows/check-standard.yaml/badge.svg)](https://github.com/Shaunson26/boundariesNSW/actions/workflows/check-standard.yaml)
 <!-- badges: end -->
 
@@ -68,9 +68,9 @@ bnsw_list_maps(full.names = FALSE)
 # Import LGA2019 into R
 # * return_sf_object = TRUE is default
 lga2019 <- bnsw_get_map(boundary = 'lga2019', return_sf_object = TRUE)
-#> lga2019-geojson.gzip extracted to C:\Users\Shaunus\AppData\Local\Temp\RtmpYJyyNg
+#> lga2019-geojson.gzip extracted to C:\Users\Shaunus\AppData\Local\Temp\RtmpYLmAvA
 #> Reading layer `lga2019' from data source 
-#>   `C:\Users\Shaunus\AppData\Local\Temp\RtmpYJyyNg\lga2019_boundaries.geojson' 
+#>   `C:\Users\Shaunus\AppData\Local\Temp\RtmpYLmAvA\lga2019_boundaries.geojson' 
 #>   using driver `GeoJSON'
 #> Simple feature collection with 129 features and 2 fields
 #> Geometry type: MULTIPOLYGON

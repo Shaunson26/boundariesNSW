@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 # boundariesNSW <img src='man/figures/logo.png' align="right" height="139" />
 
 <!-- badges: start -->
-[![GitHub R package version](https://github.com/Shaunson26/boundariesNSW)](https://img.shields.io/github/r-package/v/shaunson26/boundariesNSW)
+![GitHub R package version](https://img.shields.io/github/r-package/v/shaunson26/boundariesNSW)
 [![check-standard](https://github.com/Shaunson26/boundariesNSW/actions/workflows/check-standard.yaml/badge.svg)](https://github.com/Shaunson26/boundariesNSW/actions/workflows/check-standard.yaml)
 <!-- badges: end -->
 
