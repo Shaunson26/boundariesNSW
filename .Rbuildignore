@@ -7,3 +7,4 @@
 ^dev$
 ^\.github$
 ^man/figures/hexsticker\.R$
+^data-raw$

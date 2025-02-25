@@ -11,13 +11,19 @@ version](https://img.shields.io/github/r-package/v/shaunson26/boundariesNSW)
 <!-- badges: end -->
 
 The goal of boundariesNSW is to simplify the acquisition and use of NSW
-boundary shapefiles for **simple plotting tasks**. The package has
-simply obtained various shapefiles, simplified spatial objects (remove
-unnecessary fields), converted to geojson, and created helper functions
-to import them into your R environment, or export them to a chosen
-directory.
+boundary shapefiles, including simplification for simple plotting tasks.
 
-> Source <https://dbr.abs.gov.au/absmaps/index.html>
+The package has simply obtained various shapefiles, simplified spatial
+objects (remove unnecessary fields), converted to geojson, and created
+helper functions to import them into your R environment, or export them
+to a chosen directory.
+
+The package also provide the workflows used to generate these files from
+the source locations they were obtained from:
+
+> Sources  
+> [maps.abs.gov.au/index.html](https://maps.abs.gov.au/index.html)  
+> [abs.gov.au/statistics/standards/…](https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs-edition-3/jul2021-jun2026/access-and-downloads/digital-boundary-files)
 
 There are now 2021 shapefiles available from ABS! They are not included
 here as this package was created for other work purposes.
@@ -55,8 +61,8 @@ extraction and importing.
 
 ``` r
 bnsw_list_maps(full.names = FALSE)
-#> [1] "gccsa2016-geojson.gzip" "lga2016-geojson.gzip"   "lga2019-geojson.gzip"  
-#> [4] "lhd2010-geojson.gzip"   "poa2016-geojson.gzip"
+#> [1] "gccsa2016-geojson.gzip" "gccsa2021-geojson.gzip" "lga2016-geojson.gzip"  
+#> [4] "lga2019-geojson.gzip"   "lhd2010-geojson.gzip"   "poa2016-geojson.gzip"
 ```
 
 ### bnsw_get_map()
@@ -68,9 +74,9 @@ bnsw_list_maps(full.names = FALSE)
 # Import LGA2019 into R
 # * return_sf_object = TRUE is default
 lga2019 <- bnsw_get_map(boundary = 'lga2019', return_sf_object = TRUE)
-#> lga2019-geojson.gzip extracted to C:\Users\Shaunus\AppData\Local\Temp\RtmpYLmAvA
+#> lga2019-geojson.gzip extracted to C:\Users\shaun\AppData\Local\Temp\RtmpSKzaA3
 #> Reading layer `lga2019' from data source 
-#>   `C:\Users\Shaunus\AppData\Local\Temp\RtmpYLmAvA\lga2019_boundaries.geojson' 
+#>   `C:\Users\shaun\AppData\Local\Temp\RtmpSKzaA3\lga2019_boundaries.geojson' 
 #>   using driver `GeoJSON'
 #> Simple feature collection with 129 features and 2 fields
 #> Geometry type: MULTIPOLYGON
@@ -142,3 +148,16 @@ head(bnsw_lga2016_code_names)
 #> 5      10470 Bathurst Regional
 #> 6      10550       Bega Valley
 ```
+
+## Data aquisition
+
+Scripts in `data-raw/` detail how each boundary was obtained. They use a
+list object `bnsw_download_urls` that provides the URLs of the source
+boundary archive.
+
+    1. Download zip
+    2. Extract
+    3. Import SHP file
+    4. Filter NSW and select relevant columns
+    5. Output geojson file
+    6. Compress geojson and copy zip to inst/extdata

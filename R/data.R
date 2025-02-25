@@ -16,3 +16,13 @@
 #' @describeIn data LGA 2016 codes and names
 #' @format NULL
 'bnsw_lga2016_code_names'
+
+#' Boundary download locations
+#'
+#' URLs for downloads used in the package, allow you to do it yourself.
+#'
+#' A named list
+#' \describe{
+#'   \item{name}{Boundary names e.g. poa2021 = Postal Areas - 2021 - Shapefile}
+#' }
+#' @source <https://www.todo.com.au>
